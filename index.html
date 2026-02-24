@@ -188,6 +188,7 @@
     <a href="#tree">Decision Tree</a>
     <a href="#pipeline">RL Pipeline</a>
     <a href="#sources">Complementary Sources</a>
+    <a href="#linkage">Dataset Linkage</a>
 </nav>
 
 <div class="container">
@@ -657,7 +658,7 @@
                 <tr><td><strong>Infinite Learner</strong></td><td><a href="https://infinitelearner.eu/" target="_blank" style="color:var(--accent)">infinitelearner.eu</a></td></tr>
                 <tr><td><strong>UPO Agora</strong></td><td><a href="https://upo.digital/agora/" target="_blank" style="color:var(--accent)">upo.digital/agora</a></td></tr>
                 <tr><td><strong>Mosaic Project</strong></td><td>Cross-institutional collaboration</td></tr>
-                <tr><td><strong>RL Lead</strong></td><td>Golshid Ranjbaran (Canada)</td></tr>
+                <tr><td><strong>RL Lead</strong></td><td>Manuel Chaves Maza</td></tr>
             </table>
         </div>
         <div class="card">
@@ -792,6 +793,445 @@
             <line x1="400" y1="255" x2="400" y2="310" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow)"/>
             <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#38bdf8"/></marker></defs>
         </svg>
+    </div>
+</section>
+
+<!-- =============== DATASET LINKAGE =============== -->
+<section id="linkage">
+    <h2>Dataset Linkage Variables</h2>
+    <p style="margin-bottom:20px; color:var(--muted);">Detailed variable mapping between OULAD and each complementary dataset. Linkages are conceptual/semantic (shared constructs measured differently) rather than direct record-level joins, suitable for meta-analytic integration, transfer learning, or enriching OULAD-based models with motivation proxies.</p>
+
+    <!-- Sub-tabs for each dataset -->
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+        <button class="link-tab-btn active" data-linktab="osf" style="padding:8px 16px; border:1px solid var(--accent); background:var(--accent); color:var(--bg); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">OSF (AMS / MSLQ)</button>
+        <button class="link-tab-btn" data-linktab="mendeley" style="padding:8px 16px; border:1px solid var(--accent4); background:transparent; color:var(--accent4); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">Mendeley (xAPI-Edu)</button>
+        <button class="link-tab-btn" data-linktab="ednet" style="padding:8px 16px; border:1px solid var(--accent2); background:transparent; color:var(--accent2); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">EdNet (Riiid)</button>
+        <button class="link-tab-btn" data-linktab="uci" style="padding:8px 16px; border:1px solid var(--accent3); background:transparent; color:var(--accent3); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">UCI Student Perf.</button>
+        <button class="link-tab-btn" data-linktab="pisa" style="padding:8px 16px; border:1px solid var(--fail); background:transparent; color:var(--fail); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">PISA / TIMSS</button>
+        <button class="link-tab-btn" data-linktab="matrix" style="padding:8px 16px; border:1px solid var(--withdrawn); background:transparent; color:var(--withdrawn); border-radius:6px; cursor:pointer; font-weight:600; font-size:.85rem;">Cross-Dataset Matrix</button>
+    </div>
+
+    <!-- OSF Tab -->
+    <div class="link-tab-content" id="linktab-osf">
+        <div class="grid2">
+            <div class="card">
+                <h4 style="color:var(--accent3);">Academic Motivation Scale (AMS-C28)</h4>
+                <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">Vallerand et al. &mdash; 28 items, 7 subscales, 7-point Likert</p>
+                <table>
+                    <thead><tr><th>AMS Variable</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>IM_to_know</code></td><td>Intrinsic Motivation &mdash; to Know (4 items)</td></tr>
+                        <tr><td><code>IM_to_accomplish</code></td><td>Intrinsic Motivation &mdash; to Accomplish (4 items)</td></tr>
+                        <tr><td><code>IM_to_experience</code></td><td>Intrinsic Motivation &mdash; to Experience Stimulation (4 items)</td></tr>
+                        <tr><td><code>EM_identified</code></td><td>Extrinsic Motivation &mdash; Identified Regulation (4 items)</td></tr>
+                        <tr><td><code>EM_introjected</code></td><td>Extrinsic Motivation &mdash; Introjected Regulation (4 items)</td></tr>
+                        <tr><td><code>EM_external</code></td><td>Extrinsic Motivation &mdash; External Regulation (4 items)</td></tr>
+                        <tr><td><code>amotivation</code></td><td>Amotivation (4 items)</td></tr>
+                        <tr><td><code>gender, age, GPA</code></td><td>Typical demographic + performance covariates</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h4 style="color:var(--accent3);">MSLQ (Pintrich et al.)</h4>
+                <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">81 items, 15 subscales &mdash; Motivation + Learning Strategies</p>
+                <table>
+                    <thead><tr><th>MSLQ Variable</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>intrinsic_goal_orientation</code></td><td>Internal reasons for learning</td></tr>
+                        <tr><td><code>extrinsic_goal_orientation</code></td><td>External rewards as motivators</td></tr>
+                        <tr><td><code>task_value</code></td><td>Perceived importance of coursework</td></tr>
+                        <tr><td><code>self_efficacy</code></td><td>Confidence in academic abilities</td></tr>
+                        <tr><td><code>test_anxiety</code></td><td>Anxiety about evaluations</td></tr>
+                        <tr><td><code>metacognitive_self_reg</code></td><td>Planning, monitoring, regulating</td></tr>
+                        <tr><td><code>effort_management</code></td><td>Persistence &amp; effort regulation</td></tr>
+                        <tr><td><code>time_study_env</code></td><td>Time management strategies</td></tr>
+                        <tr><td><code>help_seeking</code></td><td>Accessing support resources</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card" style="margin-top:15px;">
+            <h4>Linkage: OSF &harr; OULAD</h4>
+            <table>
+                <thead><tr><th>OSF Variable</th><th>OULAD Variable</th><th>Linkage Type</th></tr></thead>
+                <tbody>
+                    <tr><td><code>gender, age</code></td><td><code>studentInfo.gender</code>, <code>studentInfo.age_band</code></td><td>Direct demographic match</td></tr>
+                    <tr><td><code>GPA / final_grade</code></td><td><code>studentInfo.final_result</code>, <code>studentAssessment.score</code></td><td>Performance outcome</td></tr>
+                    <tr><td><code>amotivation</code></td><td><code>studentRegistration.date_unregistration</code></td><td>Amotivation predicts withdrawal</td></tr>
+                    <tr><td><code>IM/EM subscales</code></td><td><code>studentVle.sum_click</code></td><td>Motivation drives engagement intensity</td></tr>
+                    <tr><td><code>self_efficacy</code></td><td><code>studentAssessment.score</code> + <code>final_result</code></td><td>Self-efficacy predicts performance</td></tr>
+                    <tr><td><code>effort_management</code></td><td><code>studentVle.sum_click</code> (aggregated)</td><td>Effort regulation &harr; engagement intensity</td></tr>
+                    <tr><td><code>time_study_env</code></td><td><code>studentVle.date</code> (temporal regularity)</td><td>Time management &harr; VLE usage patterns</td></tr>
+                    <tr><td><code>test_anxiety</code></td><td><code>assessments.assessment_type</code> = Exam + <code>score</code></td><td>Anxiety modulates exam performance</td></tr>
+                    <tr><td><code>metacognitive_self_reg</code></td><td><code>studentVle.sum_click</code> temporal patterns</td><td>Self-regulated learners show consistent VLE patterns</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Mendeley Tab -->
+    <div class="link-tab-content" id="linktab-mendeley" style="display:none;">
+        <div class="card">
+            <h4 style="color:var(--accent4);">xAPI-Edu-Data (Kalboard 360 LMS)</h4>
+            <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">480 students, 16 attributes + 1 class label &mdash; Also available on Kaggle</p>
+            <table>
+                <thead><tr><th>Variable</th><th>Type</th><th>Description</th></tr></thead>
+                <tbody>
+                    <tr><td><code>gender</code></td><td>Nominal</td><td>Male / Female</td></tr>
+                    <tr><td><code>NationalITy</code></td><td>Nominal</td><td>Student nationality (14 countries)</td></tr>
+                    <tr><td><code>PlaceofBirth</code></td><td>Nominal</td><td>Birth country</td></tr>
+                    <tr><td><code>StageID</code></td><td>Nominal</td><td>lowerlevel / MiddleSchool / HighSchool</td></tr>
+                    <tr><td><code>GradeID</code></td><td>Nominal</td><td>G-01 through G-12</td></tr>
+                    <tr><td><code>Topic</code></td><td>Nominal</td><td>Course subject (English, Math, IT, Biology...)</td></tr>
+                    <tr><td><code>Semester</code></td><td>Nominal</td><td>First / Second</td></tr>
+                    <tr><td><code>raisedhands</code></td><td>Numeric 0-100</td><td>Times student raises hand in class</td></tr>
+                    <tr><td><code>VisITedResources</code></td><td>Numeric 0-100</td><td>Times student visits course content</td></tr>
+                    <tr><td><code>AnnouncementsView</code></td><td>Numeric 0-100</td><td>Times student views announcements</td></tr>
+                    <tr><td><code>Discussion</code></td><td>Numeric 0-100</td><td>Times student participates in discussion</td></tr>
+                    <tr><td><code>ParentAnsweringSurvey</code></td><td>Nominal</td><td>Parent answered surveys (Yes/No)</td></tr>
+                    <tr><td><code>ParentschoolSatisfaction</code></td><td>Nominal</td><td>Parent satisfaction (Yes/No)</td></tr>
+                    <tr><td><code>StudentAbsenceDays</code></td><td>Nominal</td><td>above-7 / under-7</td></tr>
+                    <tr><td><code>Class</code></td><td>Label</td><td>L (Low 0-69) / M (Mid 70-89) / H (High 90-100)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card" style="margin-top:15px;">
+            <h4>Linkage: Mendeley xAPI &harr; OULAD</h4>
+            <table>
+                <thead><tr><th>xAPI Variable</th><th>OULAD Variable</th><th>Linkage Type</th></tr></thead>
+                <tbody>
+                    <tr><td><code>gender</code></td><td><code>studentInfo.gender</code></td><td>Direct demographic</td></tr>
+                    <tr><td><code>Topic</code></td><td><code>studentInfo.code_module</code></td><td>Course / subject mapping</td></tr>
+                    <tr><td><code>Semester</code></td><td><code>studentInfo.code_presentation</code></td><td>Temporal period</td></tr>
+                    <tr><td><code>VisITedResources</code></td><td><code>studentVle.sum_click</code></td><td>Behavioral engagement (core link)</td></tr>
+                    <tr><td><code>Discussion</code></td><td><code>studentVle.sum_click</code> where <code>activity_type</code> = forumng</td><td>Forum engagement</td></tr>
+                    <tr><td><code>raisedhands</code></td><td><code>studentVle.sum_click</code></td><td>Active participation proxy</td></tr>
+                    <tr><td><code>AnnouncementsView</code></td><td><code>studentVle.sum_click</code> where <code>activity_type</code> = oucontent</td><td>Content access</td></tr>
+                    <tr><td><code>StudentAbsenceDays</code></td><td><code>studentVle.date</code> (gaps in activity)</td><td>Absenteeism / disengagement</td></tr>
+                    <tr><td><code>Class</code> (L/M/H)</td><td><code>studentInfo.final_result</code></td><td>Performance outcome mapping</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- EdNet Tab -->
+    <div class="link-tab-content" id="linktab-ednet" style="display:none;">
+        <div class="card">
+            <h4 style="color:var(--accent2);">EdNet KT1&ndash;KT4 (Riiid / Santa)</h4>
+            <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">131M interactions, 784K students, 13K problems, 1K lectures, 293 skill tags</p>
+            <div class="grid2" style="margin-top:10px;">
+                <div>
+                    <h4 style="font-size:.9rem;">KT1 &mdash; Question-Response</h4>
+                    <table>
+                        <thead><tr><th>Variable</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>timestamp</code></td><td>Unix timestamp (ms)</td></tr>
+                            <tr><td><code>question_id</code></td><td>Question identifier</td></tr>
+                            <tr><td><code>bundle_id</code></td><td>Question bundle</td></tr>
+                            <tr><td><code>user_answer</code></td><td>Student answer (a-d)</td></tr>
+                            <tr><td><code>elapsed_time</code></td><td>Time spent on question (ms)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4 style="font-size:.9rem;">KT2&ndash;KT4 &mdash; Action Sequences</h4>
+                    <table>
+                        <thead><tr><th>Variable</th><th>Description</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>action_type</code></td><td>enter / respond / submit</td></tr>
+                            <tr><td><code>item_id</code></td><td>Question or bundle ID</td></tr>
+                            <tr><td><code>source</code></td><td>Activity source (sprint, tutor...)</td></tr>
+                            <tr><td><code>platform</code></td><td>Device type (mobile / web)</td></tr>
+                            <tr><td><code>cursor_time</code></td><td>Multimedia position (KT4)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card" style="margin-top:15px;">
+            <h4>Linkage: EdNet &harr; OULAD</h4>
+            <table>
+                <thead><tr><th>EdNet Variable</th><th>OULAD Variable</th><th>Linkage Type</th></tr></thead>
+                <tbody>
+                    <tr><td><code>timestamp</code></td><td><code>studentVle.date</code>, <code>studentAssessment.date_submitted</code></td><td>Temporal interaction patterns</td></tr>
+                    <tr><td><code>question_id</code> + correctness</td><td><code>assessments.id_assessment</code> + <code>studentAssessment.score</code></td><td>Assessment performance</td></tr>
+                    <tr><td><code>elapsed_time</code></td><td><code>studentVle.sum_click</code></td><td>Time-on-task / engagement intensity</td></tr>
+                    <tr><td><code>action_type</code></td><td><code>vle.activity_type</code></td><td>Interaction type taxonomy</td></tr>
+                    <tr><td><code>source</code> (sprint, tutor...)</td><td><code>vle.activity_type</code> (oucontent, quiz...)</td><td>Learning activity type</td></tr>
+                    <tr><td><code>platform</code></td><td>Not in OULAD</td><td>Enrichment: platform context</td></tr>
+                    <tr><td>Per-user aggregated metrics</td><td><code>studentInfo.final_result</code></td><td>Outcome prediction</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- UCI Tab -->
+    <div class="link-tab-content" id="linktab-uci" style="display:none;">
+        <div class="card">
+            <h4 style="color:var(--accent3);">UCI Student Performance (Cortez &amp; Silva)</h4>
+            <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">395 (Math) + 649 (Portuguese) students, 33 attributes each</p>
+            <table>
+                <thead><tr><th>Variable</th><th>Type</th><th>Description</th></tr></thead>
+                <tbody>
+                    <tr><td><code>school</code></td><td>Binary</td><td>GP or MS (two schools)</td></tr>
+                    <tr><td><code>sex</code></td><td>Binary</td><td>F / M</td></tr>
+                    <tr><td><code>age</code></td><td>Integer</td><td>15&ndash;22</td></tr>
+                    <tr><td><code>address</code></td><td>Binary</td><td>Urban / Rural</td></tr>
+                    <tr><td><code>Medu / Fedu</code></td><td>Integer 0-4</td><td>Mother's / Father's education level</td></tr>
+                    <tr><td><code>failures</code></td><td>Integer 0-4</td><td>Prior class failures</td></tr>
+                    <tr><td><code>studytime</code></td><td>Integer 1-4</td><td>Weekly study hours</td></tr>
+                    <tr><td><code>schoolsup / famsup</code></td><td>Binary</td><td>Extra school / family academic support</td></tr>
+                    <tr><td><code>higher</code></td><td>Binary</td><td>Wants higher education</td></tr>
+                    <tr><td><code>internet</code></td><td>Binary</td><td>Home internet access</td></tr>
+                    <tr><td><code>absences</code></td><td>Integer 0-93</td><td>School absences count</td></tr>
+                    <tr><td><code>health</code></td><td>Integer 1-5</td><td>Health status</td></tr>
+                    <tr><td><code>famrel</code></td><td>Integer 1-5</td><td>Family relationship quality</td></tr>
+                    <tr><td><code>freetime / goout</code></td><td>Integer 1-5</td><td>Leisure time / Going out frequency</td></tr>
+                    <tr><td><code>Dalc / Walc</code></td><td>Integer 1-5</td><td>Workday / Weekend alcohol consumption</td></tr>
+                    <tr><td><code>G1, G2, G3</code></td><td>Integer 0-20</td><td>Period 1, 2 &amp; Final grade</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card" style="margin-top:15px;">
+            <h4>Linkage: UCI &harr; OULAD</h4>
+            <table>
+                <thead><tr><th>UCI Variable</th><th>OULAD Variable</th><th>Linkage Type</th></tr></thead>
+                <tbody>
+                    <tr><td><code>sex</code></td><td><code>studentInfo.gender</code></td><td>Direct demographic</td></tr>
+                    <tr><td><code>age</code></td><td><code>studentInfo.age_band</code></td><td>Demographic (banded in OULAD)</td></tr>
+                    <tr><td><code>Medu / Fedu</code></td><td><code>studentInfo.highest_education</code></td><td>Education level (parent vs student)</td></tr>
+                    <tr><td><code>address</code> (urban/rural)</td><td><code>studentInfo.region</code></td><td>Geographic context</td></tr>
+                    <tr><td><code>failures</code></td><td><code>studentInfo.num_of_prev_attempts</code></td><td>Prior failure history (core link)</td></tr>
+                    <tr><td><code>studytime</code></td><td><code>studentVle.sum_click</code> (aggregated)</td><td>Study effort proxy</td></tr>
+                    <tr><td><code>absences</code></td><td><code>studentVle.date</code> (gaps) / <code>date_unregistration</code></td><td>Disengagement / dropout</td></tr>
+                    <tr><td><code>G1, G2, G3</code></td><td><code>studentAssessment.score</code> (by date) + <code>final_result</code></td><td>Sequential performance (core link)</td></tr>
+                    <tr><td><code>higher</code> (aspiration)</td><td><code>studentInfo.highest_education</code> + <code>final_result</code></td><td>Motivational proxy</td></tr>
+                    <tr><td><code>schoolsup / famsup</code></td><td>Not in OULAD</td><td>Enrichment: support context</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PISA/TIMSS Tab -->
+    <div class="link-tab-content" id="linktab-pisa" style="display:none;">
+        <div class="grid2">
+            <div class="card">
+                <h4 style="color:var(--fail);">PISA 2022 (OECD)</h4>
+                <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">~690,000 students from 81 countries</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>ST004D01T</code></td><td>Gender</td></tr>
+                        <tr><td><code>AGE</code></td><td>Student age</td></tr>
+                        <tr><td><code>ESCS</code></td><td>Economic, Social &amp; Cultural Status index</td></tr>
+                        <tr><td><code>PARED</code></td><td>Highest parental education (years)</td></tr>
+                        <tr><td><code>MATHMOT</code></td><td>Mathematics motivation</td></tr>
+                        <tr><td><code>MATHEFF</code></td><td>Mathematics self-efficacy</td></tr>
+                        <tr><td><code>ANXMAT</code></td><td>Mathematics anxiety</td></tr>
+                        <tr><td><code>BELONG</code></td><td>Sense of belonging at school</td></tr>
+                        <tr><td><code>MASTGOAL</code></td><td>Motivation to master tasks</td></tr>
+                        <tr><td><code>CURIOAGR</code></td><td>Curiosity (10 items, 5-point Likert)</td></tr>
+                        <tr><td><code>TRUANCY</code></td><td>Truancy index</td></tr>
+                        <tr><td><code>PV1MATH&ndash;PV10MATH</code></td><td>Plausible values in mathematics</td></tr>
+                        <tr><td><code>CNT</code></td><td>Country code</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h4 style="color:var(--fail);">TIMSS 2019 (IEA)</h4>
+                <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">~330,000 students (4th &amp; 8th grade), 64 countries</p>
+                <table>
+                    <thead><tr><th>Variable</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>ITSEX</code></td><td>Gender</td></tr>
+                        <tr><td><code>BSDAGE</code></td><td>Student age</td></tr>
+                        <tr><td><code>BSDGEDUP</code></td><td>Parents' highest education</td></tr>
+                        <tr><td><code>BSBM_LM</code></td><td>Students Like Learning Math (intrinsic)</td></tr>
+                        <tr><td><code>BSBM_VM</code></td><td>Students Value Mathematics (utility)</td></tr>
+                        <tr><td><code>BSBM_CM</code></td><td>Students Confident in Math (self-concept)</td></tr>
+                        <tr><td><code>BSBS_LS</code></td><td>Students Like Learning Science</td></tr>
+                        <tr><td><code>BSBS_VS</code></td><td>Students Value Science</td></tr>
+                        <tr><td><code>BSBS_CS</code></td><td>Students Confident in Science</td></tr>
+                        <tr><td><code>BSMMAT01&ndash;05</code></td><td>Plausible values in mathematics</td></tr>
+                        <tr><td><code>BSBG11</code></td><td>Homework frequency</td></tr>
+                        <tr><td><code>IDCNTRY</code></td><td>Country ID</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card" style="margin-top:15px;">
+            <h4>Linkage: PISA / TIMSS &harr; OULAD</h4>
+            <table>
+                <thead><tr><th>PISA / TIMSS Variable</th><th>OULAD Variable</th><th>Linkage Type</th></tr></thead>
+                <tbody>
+                    <tr><td><code>Gender</code> / <code>ITSEX</code></td><td><code>studentInfo.gender</code></td><td>Direct demographic</td></tr>
+                    <tr><td><code>AGE</code> / <code>BSDAGE</code></td><td><code>studentInfo.age_band</code></td><td>Demographic</td></tr>
+                    <tr><td><code>ESCS</code></td><td><code>studentInfo.imd_band</code></td><td>Socioeconomic status (core link)</td></tr>
+                    <tr><td><code>PARED</code> / <code>BSDGEDUP</code></td><td><code>studentInfo.highest_education</code></td><td>Education background</td></tr>
+                    <tr><td><code>MATHMOT</code> / <code>BSBM_LM</code></td><td><code>studentVle.sum_click</code> patterns</td><td>Motivation drives engagement</td></tr>
+                    <tr><td><code>MATHEFF</code> / <code>BSBM_CM</code></td><td><code>studentAssessment.score</code> + <code>final_result</code></td><td>Self-efficacy predicts performance</td></tr>
+                    <tr><td><code>ANXMAT</code></td><td><code>assessments.assessment_type</code>=Exam + <code>score</code></td><td>Anxiety modulates exam performance</td></tr>
+                    <tr><td><code>TRUANCY</code></td><td><code>studentRegistration.date_unregistration</code> / VLE gaps</td><td>Disengagement / dropout</td></tr>
+                    <tr><td><code>BELONG</code></td><td><code>studentVle</code> activity in forums</td><td>Belonging &harr; community participation</td></tr>
+                    <tr><td>Plausible values (PV scores)</td><td><code>studentAssessment.score</code>, <code>final_result</code></td><td>Academic performance</td></tr>
+                    <tr><td><code>CNT</code> / <code>IDCNTRY</code></td><td><code>studentInfo.region</code></td><td>Geographic context (different granularity)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Cross-Dataset Matrix Tab -->
+    <div class="link-tab-content" id="linktab-matrix" style="display:none;">
+        <div class="card">
+            <h4 style="color:var(--withdrawn);">Cross-Dataset Linkage Matrix</h4>
+            <p style="color:var(--muted); font-size:.85rem; margin-bottom:10px;">Shared constructs that bridge OULAD with each complementary dataset. OULAD provides rich behavioral trace data but lacks direct psychological/motivational measures &mdash; these datasets fill that gap.</p>
+            <div style="overflow-x:auto;">
+                <table style="font-size:.82rem;">
+                    <thead>
+                        <tr>
+                            <th>Shared Construct</th>
+                            <th>OULAD Proxy</th>
+                            <th style="color:var(--accent3)">OSF (AMS/MSLQ)</th>
+                            <th style="color:var(--accent4)">Mendeley (xAPI)</th>
+                            <th style="color:var(--accent2)">EdNet</th>
+                            <th style="color:var(--accent3)">UCI Perf.</th>
+                            <th style="color:var(--fail)">PISA/TIMSS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gender</strong></td>
+                            <td><code>gender</code></td>
+                            <td>gender</td>
+                            <td>Gender</td>
+                            <td>&mdash;</td>
+                            <td>sex</td>
+                            <td>Gender / ITSEX</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age</strong></td>
+                            <td><code>age_band</code></td>
+                            <td>age</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>age</td>
+                            <td>AGE / BSDAGE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SES / Deprivation</strong></td>
+                            <td><code>imd_band</code></td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>address</td>
+                            <td>ESCS</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Education Background</strong></td>
+                            <td><code>highest_education</code></td>
+                            <td>program</td>
+                            <td>StageID</td>
+                            <td>&mdash;</td>
+                            <td>Medu / Fedu</td>
+                            <td>PARED / BSDGEDUP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Course / Subject</strong></td>
+                            <td><code>code_module</code></td>
+                            <td>course</td>
+                            <td>Topic</td>
+                            <td>question tags</td>
+                            <td>school</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prior Failures</strong></td>
+                            <td><code>num_of_prev_attempts</code></td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>failures</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Engagement (clicks)</strong></td>
+                            <td><code>sum_click</code></td>
+                            <td>effort_mgmt</td>
+                            <td>VisITedResources</td>
+                            <td>elapsed_time</td>
+                            <td>studytime</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Assessment Score</strong></td>
+                            <td><code>score</code> / <code>final_result</code></td>
+                            <td>GPA</td>
+                            <td>Class (L/M/H)</td>
+                            <td>correctness</td>
+                            <td>G1 / G2 / G3</td>
+                            <td>PV scores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Temporal Pattern</strong></td>
+                            <td><code>date</code> (VLE / assessment)</td>
+                            <td>&mdash;</td>
+                            <td>Semester</td>
+                            <td>timestamp</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dropout / Withdrawal</strong></td>
+                            <td><code>date_unregistration</code></td>
+                            <td>amotivation</td>
+                            <td>AbsenceDays</td>
+                            <td>&mdash;</td>
+                            <td>absences</td>
+                            <td>TRUANCY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Activity Type</strong></td>
+                            <td><code>activity_type</code></td>
+                            <td>learning strategies</td>
+                            <td>Discussion, Resources</td>
+                            <td>action_type, source</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr style="background:rgba(56,189,248,.08);">
+                            <td><strong>Motivation</strong></td>
+                            <td><em>Behavioral proxies only</em></td>
+                            <td>IM / EM subscales</td>
+                            <td>raisedhands</td>
+                            <td>&mdash;</td>
+                            <td>higher (aspiration)</td>
+                            <td>MATHMOT, Like/Value</td>
+                        </tr>
+                        <tr style="background:rgba(56,189,248,.08);">
+                            <td><strong>Self-Efficacy</strong></td>
+                            <td><em>Behavioral proxies only</em></td>
+                            <td>self_efficacy</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>MATHEFF, Confident</td>
+                        </tr>
+                        <tr style="background:rgba(56,189,248,.08);">
+                            <td><strong>Anxiety</strong></td>
+                            <td><em>Behavioral proxies only</em></td>
+                            <td>test_anxiety</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td>ANXMAT</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:var(--muted); font-size:.82rem; margin-top:12px;">
+                <strong>Key insight:</strong> The last three rows (highlighted) represent psychological constructs that OULAD can only capture through behavioral proxies. The complementary datasets provide direct measures, enabling meta-analytic integration, transfer learning, or enrichment of OULAD-based models with explicit motivation variables for RL training.
+            </p>
+        </div>
     </div>
 </section>
 
@@ -1068,6 +1508,26 @@ window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
     navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+
+// Dataset Linkage sub-tabs
+document.querySelectorAll('.link-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.linktab;
+        // Deactivate all buttons
+        document.querySelectorAll('.link-tab-btn').forEach(b => {
+            b.style.background = 'transparent';
+            b.classList.remove('active');
+        });
+        // Activate clicked button
+        btn.style.background = getComputedStyle(btn).borderColor;
+        btn.style.color = 'var(--bg)';
+        btn.classList.add('active');
+        // Show/hide tab contents
+        document.querySelectorAll('.link-tab-content').forEach(tc => {
+            tc.style.display = tc.id === 'linktab-' + target ? 'block' : 'none';
+        });
+    });
 });
 </script>
 
