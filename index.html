@@ -1241,7 +1241,7 @@
 <!-- ============ INTEGRATED ANALYSIS ============ -->
 <section id="integrated">
     <h2>Integrated Analysis</h2>
-    <p style="margin-bottom:20px; color:var(--muted);">Summary of the cross-dataset integration combining OULAD with UCI Student Performance, xAPI-Edu-Data, PISA 2022, TIMSS 2019, and EdNet. Full analysis available in the <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="color:var(--accent);">Google Colab notebook</a>.</p>
+    <p style="margin-bottom:20px; color:var(--muted);">Summary of the cross-dataset integration combining OULAD with UCI Student Performance, xAPI-Edu-Data, PISA 2022, TIMSS 2019, and EdNet. Full analysis available in the <a href="https://colab.research.google.com/drive/1lXj-pQmpThVzW-keT3iA9PiBNL1ynkgK?usp=sharing" target="_blank" style="color:var(--accent);">Google Colab notebook</a>.</p>
 
     <!-- Integrated Database Diagram (SVG) -->
     <div class="card" style="margin-bottom:20px; overflow-x:auto;">
@@ -1435,6 +1435,55 @@
         </div>
     </div>
 
+    <!-- Why Datasets Are Independent -->
+    <div class="card" style="margin-top:20px; border-left:4px solid var(--accent4);">
+        <h4 style="color:var(--accent4);">Why Are OULAD and UCI Treated Independently?</h4>
+        <p style="color:var(--muted); margin:10px 0 15px; font-size:.9rem;">
+            These datasets <strong>cannot be merged at the record level</strong> (i.e., rows cannot be joined). They represent completely different student populations with no shared identifiers. The connection between them is exclusively at the <strong>construct level</strong>: both measure similar educational concepts but for different people, in different countries, and at different educational stages.
+        </p>
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                    <tr><th></th><th style="color:var(--accent);">OULAD</th><th style="color:var(--accent3);">UCI Student Performance</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Country</strong></td><td>United Kingdom</td><td>Portugal</td></tr>
+                    <tr><td><strong>Educational Level</strong></td><td>Distance university (Open University)</td><td>Secondary education (high school)</td></tr>
+                    <tr><td><strong>Age Range</strong></td><td>Adults (many &gt;35 years)</td><td>Teenagers (15&ndash;22 years)</td></tr>
+                    <tr><td><strong>Time Period</strong></td><td>2013&ndash;2014</td><td>2005&ndash;2006</td></tr>
+                    <tr><td><strong>N Students</strong></td><td>32,593</td><td>1,044</td></tr>
+                    <tr><td><strong>Modality</strong></td><td>Online, asynchronous</td><td>In-person, traditional</td></tr>
+                    <tr><td><strong>Key Variables</strong></td><td>VLE clicks, TMA/CMA/Exam scores</td><td>G1/G2/G3 grades, alcohol use, study time</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4 style="color:var(--accent); margin-top:18px; font-size:.95rem;">What Type of Connection Do They Have?</h4>
+        <p style="color:var(--muted); margin:8px 0 12px; font-size:.88rem;">
+            The linkage is at the <strong>construct level</strong> (same concept, different measurement):
+        </p>
+        <ul style="color:var(--text); font-size:.88rem; line-height:1.9; padding-left:20px;">
+            <li><strong>Gender</strong>: <code>gender</code> (OULAD) &harr; <code>sex</code> (UCI) &mdash; compare if gender effects on performance are consistent</li>
+            <li><strong>Prior Failures</strong>: <code>num_of_prev_attempts</code> (OULAD) &harr; <code>failures</code> (UCI) &mdash; both measure repeated attempts</li>
+            <li><strong>Academic Outcome</strong>: <code>final_result</code> (OULAD) &harr; <code>G3</code> (UCI) &mdash; different scales, same concept</li>
+            <li><strong>Family Education</strong>: <code>highest_education</code> (OULAD, student's own) &harr; <code>Medu/Fedu</code> (UCI, parent's) &mdash; semantic proxy, not identical</li>
+        </ul>
+        <h4 style="color:var(--accent2); margin-top:18px; font-size:.95rem;">How Can They Be Used Together?</h4>
+        <div class="grid2" style="margin-top:10px;">
+            <div>
+                <ul style="color:var(--text); font-size:.85rem; line-height:1.8; padding-left:18px;">
+                    <li><strong>Cross-validation of findings</strong>: if gender does not predict outcome in OULAD <em>or</em> UCI, the conclusion is more robust</li>
+                    <li><strong>Meta-analysis</strong>: compare effect sizes across educational contexts</li>
+                </ul>
+            </div>
+            <div>
+                <ul style="color:var(--text); font-size:.85rem; line-height:1.8; padding-left:18px;">
+                    <li><strong>Transfer learning</strong>: train a model on one dataset and test generalization on the other</li>
+                    <li><strong>Narrative enrichment</strong>: "this pattern replicates even in a completely different educational system"</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Cross-Dataset Patterns -->
     <div class="card" style="margin-top:20px;">
         <h4 style="color:var(--accent2);">Cross-Dataset Findings</h4>
@@ -1493,7 +1542,7 @@
     <div class="card" style="margin-top:20px; text-align:center; background:linear-gradient(135deg, rgba(56,189,248,.1), rgba(167,139,250,.1));">
         <h4 style="color:var(--accent); font-size:1.2rem;">Full Analysis Notebook</h4>
         <p style="color:var(--muted); margin:10px 0;">All code, data loading, harmonization, cross-dataset comparisons, diagrams, and export functions are available in the interactive Colab notebook.</p>
-        <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
+        <a href="https://colab.research.google.com/drive/1lXj-pQmpThVzW-keT3iA9PiBNL1ynkgK?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
     </div>
 </section>
 
@@ -1900,7 +1949,7 @@
     <div class="card" style="text-align:center; background:linear-gradient(135deg, rgba(248,113,113,.1), rgba(251,146,60,.1));">
         <h4 style="color:var(--accent4); font-size:1.2rem;">Full Analysis &amp; Code</h4>
         <p style="color:var(--muted); margin:10px 0;">Data loading, harmonization, visualizations, and the complete pipeline code are available in the interactive Colab notebook.</p>
-        <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent4); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
+        <a href="https://colab.research.google.com/drive/1lXj-pQmpThVzW-keT3iA9PiBNL1ynkgK?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent4); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
     </div>
 </section>
 
