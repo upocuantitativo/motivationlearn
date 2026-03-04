@@ -191,6 +191,7 @@
     <a href="#sources">Complementary Sources</a>
     <a href="#linkage">Dataset Linkage</a>
     <a href="#integrated">Integrated Analysis</a>
+    <a href="#rl-clones">RL Virtual Clones</a>
 </nav>
 
 <div class="container">
@@ -1240,7 +1241,7 @@
 <!-- ============ INTEGRATED ANALYSIS ============ -->
 <section id="integrated">
     <h2>Integrated Analysis</h2>
-    <p style="margin-bottom:20px; color:var(--muted);">Summary of the cross-dataset integration combining OULAD with UCI Student Performance, xAPI-Edu-Data, PISA 2022, TIMSS 2019, and EdNet. Full analysis available in the <a href="https://colab.research.google.com/drive/1Tjc3zbDnbi9sRJGPxNuvVnZqJFFy25XP?usp=sharing" target="_blank" style="color:var(--accent);">Google Colab notebook</a>.</p>
+    <p style="margin-bottom:20px; color:var(--muted);">Summary of the cross-dataset integration combining OULAD with UCI Student Performance, xAPI-Edu-Data, PISA 2022, TIMSS 2019, and EdNet. Full analysis available in the <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="color:var(--accent);">Google Colab notebook</a>.</p>
 
     <!-- Integrated Database Diagram (SVG) -->
     <div class="card" style="margin-bottom:20px; overflow-x:auto;">
@@ -1492,7 +1493,414 @@
     <div class="card" style="margin-top:20px; text-align:center; background:linear-gradient(135deg, rgba(56,189,248,.1), rgba(167,139,250,.1));">
         <h4 style="color:var(--accent); font-size:1.2rem;">Full Analysis Notebook</h4>
         <p style="color:var(--muted); margin:10px 0;">All code, data loading, harmonization, cross-dataset comparisons, diagrams, and export functions are available in the interactive Colab notebook.</p>
-        <a href="https://colab.research.google.com/drive/1Tjc3zbDnbi9sRJGPxNuvVnZqJFFy25XP?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
+        <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
+    </div>
+</section>
+
+<!-- ============ RL VIRTUAL CLONES ============ -->
+<section id="rl-clones">
+    <h2>RL Virtual Clones Pipeline</h2>
+    <p style="margin-bottom:25px; color:var(--muted); max-width:900px;">
+        This section describes the proposed research pipeline to create <strong>virtual student clones</strong> using Reinforcement Learning (RL).
+        The goal: build AI agents that replicate real student behavior, then expose them to thousands of educational scenarios to discover which interventions maximize learning outcomes.
+    </p>
+
+    <!-- Big Picture: 5-Phase SVG Diagram -->
+    <div class="card" style="margin-bottom:25px; overflow-x:auto;">
+        <h4 style="color:var(--accent); margin-bottom:15px;">The Big Picture: From Data to Optimal Interventions</h4>
+        <svg viewBox="0 0 1000 340" style="width:100%; max-width:1000px; margin:0 auto; display:block;" xmlns="http://www.w3.org/2000/svg">
+            <rect width="1000" height="340" fill="#0f172a" rx="8"/>
+
+            <!-- Phase 1: Data -->
+            <rect x="20" y="50" width="170" height="230" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="105" y="75" text-anchor="middle" fill="#38bdf8" font-size="11" font-weight="bold">PHASE 1</text>
+            <text x="105" y="93" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">Data Mining</text>
+            <rect x="35" y="108" width="140" height="22" rx="4" fill="rgba(56,189,248,.15)"/>
+            <text x="105" y="123" text-anchor="middle" fill="#38bdf8" font-size="9">OULAD (32,593 students)</text>
+            <rect x="35" y="135" width="140" height="22" rx="4" fill="rgba(56,189,248,.1)"/>
+            <text x="105" y="150" text-anchor="middle" fill="#94a3b8" font-size="9">UCI + xAPI + PISA</text>
+            <line x1="40" y1="168" x2="170" y2="168" stroke="#334155" stroke-width="1"/>
+            <text x="105" y="185" text-anchor="middle" fill="#94a3b8" font-size="8">Clean &amp; merge tables</text>
+            <text x="105" y="200" text-anchor="middle" fill="#94a3b8" font-size="8">Feature engineering</text>
+            <text x="105" y="215" text-anchor="middle" fill="#94a3b8" font-size="8">Assessment aggregates</text>
+            <text x="105" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">VLE click patterns</text>
+            <text x="105" y="245" text-anchor="middle" fill="#94a3b8" font-size="8">Temporal regularity</text>
+            <text x="105" y="265" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">Output: Master Table</text>
+
+            <!-- Arrow 1->2 -->
+            <polygon points="195,165 210,155 210,175" fill="#38bdf8"/>
+
+            <!-- Phase 2: Clustering -->
+            <rect x="215" y="50" width="170" height="230" rx="10" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+            <text x="300" y="75" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">PHASE 2</text>
+            <text x="300" y="93" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">Student Profiles</text>
+            <rect x="230" y="108" width="140" height="22" rx="4" fill="rgba(167,139,250,.15)"/>
+            <text x="300" y="123" text-anchor="middle" fill="#a78bfa" font-size="9">K-Prototypes Clustering</text>
+            <line x1="235" y1="140" x2="365" y2="140" stroke="#334155" stroke-width="1"/>
+            <circle cx="255" cy="160" r="12" fill="rgba(52,211,153,.2)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="255" y="164" text-anchor="middle" fill="#34d399" font-size="8" font-weight="bold">A</text>
+            <text x="290" y="164" fill="#94a3b8" font-size="8">Engaged Achiever</text>
+            <circle cx="255" cy="188" r="12" fill="rgba(56,189,248,.2)" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="255" y="192" text-anchor="middle" fill="#38bdf8" font-size="8" font-weight="bold">B</text>
+            <text x="290" y="192" fill="#94a3b8" font-size="8">Steady Learner</text>
+            <circle cx="255" cy="216" r="12" fill="rgba(251,146,60,.2)" stroke="#fb923c" stroke-width="1.5"/>
+            <text x="255" y="220" text-anchor="middle" fill="#fb923c" font-size="8" font-weight="bold">C</text>
+            <text x="290" y="220" fill="#94a3b8" font-size="8">At-Risk Drifter</text>
+            <circle cx="255" cy="244" r="12" fill="rgba(248,113,113,.2)" stroke="#f87171" stroke-width="1.5"/>
+            <text x="255" y="248" text-anchor="middle" fill="#f87171" font-size="8" font-weight="bold">D</text>
+            <text x="290" y="248" fill="#94a3b8" font-size="8">Disengaged Dropout</text>
+            <text x="300" y="275" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">Output: 4 Archetypes</text>
+
+            <!-- Arrow 2->3 -->
+            <polygon points="390,165 405,155 405,175" fill="#a78bfa"/>
+
+            <!-- Phase 3: Classification -->
+            <rect x="410" y="50" width="170" height="230" rx="10" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+            <text x="495" y="75" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">PHASE 3</text>
+            <text x="495" y="93" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">Prediction Model</text>
+            <rect x="425" y="108" width="140" height="22" rx="4" fill="rgba(52,211,153,.15)"/>
+            <text x="495" y="123" text-anchor="middle" fill="#34d399" font-size="9">XGBoost / Random Forest</text>
+            <line x1="430" y1="140" x2="560" y2="140" stroke="#334155" stroke-width="1"/>
+            <text x="495" y="158" text-anchor="middle" fill="#94a3b8" font-size="8">Target: final_result</text>
+            <text x="495" y="173" text-anchor="middle" fill="#94a3b8" font-size="8">(Distinction/Pass/Fail/Withdrawn)</text>
+            <line x1="430" y1="185" x2="560" y2="185" stroke="#334155" stroke-width="1"/>
+            <text x="495" y="202" text-anchor="middle" fill="#94a3b8" font-size="8">Feature importance</text>
+            <text x="495" y="217" text-anchor="middle" fill="#94a3b8" font-size="8">Temporal early warning</text>
+            <text x="495" y="232" text-anchor="middle" fill="#94a3b8" font-size="8">Cross-validation</text>
+            <text x="495" y="265" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">Output: Outcome Predictor</text>
+
+            <!-- Arrow 3->4 -->
+            <polygon points="585,165 600,155 600,175" fill="#34d399"/>
+
+            <!-- Phase 4: Virtual Clones -->
+            <rect x="605" y="50" width="170" height="230" rx="10" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+            <text x="690" y="75" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">PHASE 4</text>
+            <text x="690" y="93" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">Virtual Clones</text>
+            <rect x="620" y="108" width="140" height="22" rx="4" fill="rgba(251,146,60,.15)"/>
+            <text x="690" y="123" text-anchor="middle" fill="#fb923c" font-size="9">Synthetic Agent Generation</text>
+            <line x1="625" y1="140" x2="755" y2="140" stroke="#334155" stroke-width="1"/>
+            <text x="690" y="158" text-anchor="middle" fill="#94a3b8" font-size="8">Each cluster profile</text>
+            <text x="690" y="171" text-anchor="middle" fill="#94a3b8" font-size="8">becomes a virtual student</text>
+            <line x1="625" y1="183" x2="755" y2="183" stroke="#334155" stroke-width="1"/>
+            <text x="690" y="200" text-anchor="middle" fill="#94a3b8" font-size="8">Behavioral rules from data</text>
+            <text x="690" y="215" text-anchor="middle" fill="#94a3b8" font-size="8">Stochastic response model</text>
+            <text x="690" y="230" text-anchor="middle" fill="#94a3b8" font-size="8">Calibrated with real outcomes</text>
+            <text x="690" y="265" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">Output: N Virtual Students</text>
+
+            <!-- Arrow 4->5 -->
+            <polygon points="780,165 795,155 795,175" fill="#fb923c"/>
+
+            <!-- Phase 5: RL Training -->
+            <rect x="800" y="50" width="185" height="230" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="2.5"/>
+            <text x="892" y="75" text-anchor="middle" fill="#f87171" font-size="11" font-weight="bold">PHASE 5</text>
+            <text x="892" y="93" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="bold">RL Training</text>
+            <rect x="815" y="108" width="155" height="22" rx="4" fill="rgba(248,113,113,.15)"/>
+            <text x="892" y="123" text-anchor="middle" fill="#f87171" font-size="9">PPO / DQN / SAC</text>
+            <line x1="820" y1="140" x2="970" y2="140" stroke="#334155" stroke-width="1"/>
+            <text x="892" y="158" text-anchor="middle" fill="#94a3b8" font-size="8">State: student profile + time</text>
+            <text x="892" y="173" text-anchor="middle" fill="#94a3b8" font-size="8">Action: intervention type</text>
+            <text x="892" y="188" text-anchor="middle" fill="#94a3b8" font-size="8">Reward: outcome improvement</text>
+            <line x1="820" y1="200" x2="970" y2="200" stroke="#334155" stroke-width="1"/>
+            <text x="892" y="218" text-anchor="middle" fill="#94a3b8" font-size="8">1000s of episodes per clone</text>
+            <text x="892" y="233" text-anchor="middle" fill="#94a3b8" font-size="8">Explore intervention space</text>
+            <text x="892" y="265" text-anchor="middle" fill="#f87171" font-size="9" font-weight="bold">Output: Optimal Policy</text>
+
+            <!-- Title -->
+            <text x="500" y="25" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="bold">Research Pipeline: Data to Optimal Educational Interventions</text>
+
+            <!-- Bottom summary -->
+            <rect x="150" y="295" width="700" height="30" rx="6" fill="rgba(56,189,248,.08)" stroke="#334155" stroke-width="1"/>
+            <text x="500" y="315" text-anchor="middle" fill="#94a3b8" font-size="10">32,593 real students &#x2192; 4 motivation archetypes &#x2192; N virtual clones &#x2192; 1000s of simulated scenarios &#x2192; Personalized intervention policy</text>
+        </svg>
+    </div>
+
+    <!-- What is a Virtual Clone? -->
+    <div class="grid2" style="margin-bottom:20px;">
+        <div class="card">
+            <h4 style="color:var(--accent4);">What is a Virtual Student Clone?</h4>
+            <p style="color:var(--text); font-size:.9rem; line-height:1.8;">
+                A virtual clone is a <strong>software agent</strong> that behaves like a real student from the OULAD dataset.
+                It is built from the statistical profile of a student cluster and reproduces:
+            </p>
+            <ul style="color:var(--text); font-size:.88rem; line-height:2; padding-left:20px; margin-top:8px;">
+                <li><strong>Engagement patterns</strong> &mdash; how often and when the student accesses VLE materials</li>
+                <li><strong>Assessment behavior</strong> &mdash; submission timing, score distributions, banked credits</li>
+                <li><strong>Dropout probability</strong> &mdash; likelihood of withdrawal under different conditions</li>
+                <li><strong>Response to interventions</strong> &mdash; how the student reacts to nudges, reminders, or content changes</li>
+            </ul>
+            <p style="color:var(--muted); font-size:.82rem; margin-top:10px;">
+                Virtual clones allow us to run experiments that would be <strong>impossible or unethical</strong> with real students:
+                testing thousands of intervention strategies, varying intensity and timing, without affecting anyone's actual grades.
+            </p>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--accent2);">Why Reinforcement Learning?</h4>
+            <p style="color:var(--text); font-size:.9rem; line-height:1.8;">
+                Traditional approaches (A/B testing, regression) can only test a few interventions at a time.
+                RL solves a fundamentally different problem:
+            </p>
+            <div style="background:rgba(167,139,250,.08); border-radius:8px; padding:15px; margin-top:10px; border:1px solid rgba(167,139,250,.2);">
+                <p style="color:var(--accent2); font-weight:600; font-size:.95rem; margin-bottom:8px;">The RL Question:</p>
+                <p style="color:var(--text); font-size:.9rem; font-style:italic;">
+                    "Given a student with profile X at time T, what is the <strong>best sequence of actions</strong>
+                    to maximize their probability of passing?"
+                </p>
+            </div>
+            <p style="color:var(--text); font-size:.88rem; line-height:1.8; margin-top:12px;">
+                The RL agent learns by <strong>trial and error</strong> across thousands of episodes with virtual clones,
+                discovering non-obvious intervention strategies that depend on student type, timing, and context.
+            </p>
+        </div>
+    </div>
+
+    <!-- RL Environment Design -->
+    <div class="card" style="margin-bottom:20px;">
+        <h4 style="color:var(--accent);">RL Environment Design</h4>
+        <div class="grid3" style="margin-top:15px;">
+            <div style="background:rgba(56,189,248,.06); border-radius:8px; padding:16px; border:1px solid rgba(56,189,248,.15);">
+                <h4 style="color:var(--accent); font-size:1rem; margin-bottom:10px;">State Space (S)</h4>
+                <p style="color:var(--muted); font-size:.82rem; margin-bottom:8px;">What the agent observes at each timestep:</p>
+                <table style="font-size:.82rem;">
+                    <tbody>
+                        <tr><td style="color:var(--accent3);">Student profile</td><td>gender, age, education, IMD, disability</td></tr>
+                        <tr><td style="color:var(--accent3);">Cluster type</td><td>archetype A / B / C / D</td></tr>
+                        <tr><td style="color:var(--accent3);">Current week</td><td>relative to module start (1-38)</td></tr>
+                        <tr><td style="color:var(--accent3);">Engagement</td><td>recent VLE clicks, active days</td></tr>
+                        <tr><td style="color:var(--accent3);">Assessment</td><td>scores so far, submissions pending</td></tr>
+                        <tr><td style="color:var(--accent3);">Risk signal</td><td>predicted outcome probability</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="background:rgba(167,139,250,.06); border-radius:8px; padding:16px; border:1px solid rgba(167,139,250,.15);">
+                <h4 style="color:var(--accent2); font-size:1rem; margin-bottom:10px;">Action Space (A)</h4>
+                <p style="color:var(--muted); font-size:.82rem; margin-bottom:8px;">Interventions the agent can apply:</p>
+                <table style="font-size:.82rem;">
+                    <tbody>
+                        <tr><td style="color:var(--accent4);">No action</td><td>Do nothing (baseline)</td></tr>
+                        <tr><td style="color:var(--accent4);">Reminder</td><td>Send engagement nudge</td></tr>
+                        <tr><td style="color:var(--accent4);">Content adapt</td><td>Adjust difficulty level</td></tr>
+                        <tr><td style="color:var(--accent4);">Feedback</td><td>Provide formative feedback</td></tr>
+                        <tr><td style="color:var(--accent4);">Resources</td><td>Suggest supplementary materials</td></tr>
+                        <tr><td style="color:var(--accent4);">Peer connect</td><td>Facilitate peer interaction</td></tr>
+                        <tr><td style="color:var(--accent4);">Tutor alert</td><td>Flag for human tutor review</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="background:rgba(52,211,153,.06); border-radius:8px; padding:16px; border:1px solid rgba(52,211,153,.15);">
+                <h4 style="color:var(--accent3); font-size:1rem; margin-bottom:10px;">Reward Function (R)</h4>
+                <p style="color:var(--muted); font-size:.82rem; margin-bottom:8px;">Signal that guides learning:</p>
+                <table style="font-size:.82rem;">
+                    <tbody>
+                        <tr><td style="color:var(--pass);">+10</td><td>Student passes or gets distinction</td></tr>
+                        <tr><td style="color:var(--pass);">+3</td><td>Assessment score improves</td></tr>
+                        <tr><td style="color:var(--pass);">+2</td><td>VLE engagement increases</td></tr>
+                        <tr><td style="color:var(--pass);">+1</td><td>Student submits on time</td></tr>
+                        <tr><td style="color:var(--fail);">-1</td><td>Intervention cost (resource use)</td></tr>
+                        <tr><td style="color:var(--fail);">-5</td><td>Student fails the module</td></tr>
+                        <tr><td style="color:var(--fail);">-8</td><td>Student withdraws from module</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simulation Flow Diagram -->
+    <div class="card" style="margin-bottom:20px; overflow-x:auto;">
+        <h4 style="color:var(--accent4); margin-bottom:15px;">How One Episode Works</h4>
+        <svg viewBox="0 0 900 200" style="width:100%; max-width:900px; margin:0 auto; display:block;" xmlns="http://www.w3.org/2000/svg">
+            <rect width="900" height="200" fill="#0f172a" rx="8"/>
+
+            <!-- Week boxes -->
+            <rect x="20" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+            <text x="70" y="82" text-anchor="middle" fill="#38bdf8" font-size="9" font-weight="bold">WEEK 1</text>
+            <text x="70" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Clone starts module</text>
+            <text x="70" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">Initial engagement</text>
+            <text x="70" y="128" text-anchor="middle" fill="#34d399" font-size="8">State: high risk=No</text>
+
+            <polygon points="125,100 140,93 140,107" fill="#38bdf8"/>
+
+            <rect x="145" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#a78bfa" stroke-width="1.5"/>
+            <text x="195" y="82" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="bold">WEEK 5</text>
+            <text x="195" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Engagement drops</text>
+            <text x="195" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">TMA1 score: 45/100</text>
+            <text x="195" y="128" text-anchor="middle" fill="#fbbf24" font-size="8">Action: Reminder</text>
+
+            <polygon points="250,100 265,93 265,107" fill="#a78bfa"/>
+
+            <rect x="270" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#fb923c" stroke-width="1.5"/>
+            <text x="320" y="82" text-anchor="middle" fill="#fb923c" font-size="9" font-weight="bold">WEEK 10</text>
+            <text x="320" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Clicks increase +40%</text>
+            <text x="320" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">TMA2 score: 62/100</text>
+            <text x="320" y="128" text-anchor="middle" fill="#34d399" font-size="8">Reward: +3</text>
+
+            <polygon points="375,100 390,93 390,107" fill="#fb923c"/>
+
+            <rect x="395" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#34d399" stroke-width="1.5"/>
+            <text x="445" y="82" text-anchor="middle" fill="#34d399" font-size="9" font-weight="bold">WEEK 20</text>
+            <text x="445" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Stable engagement</text>
+            <text x="445" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">CMA avg: 71/100</text>
+            <text x="445" y="128" text-anchor="middle" fill="#34d399" font-size="8">Action: No action</text>
+
+            <polygon points="500,100 515,93 515,107" fill="#34d399"/>
+
+            <rect x="520" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+            <text x="570" y="82" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="bold">WEEK 30</text>
+            <text x="570" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Pre-exam anxiety</text>
+            <text x="570" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">Forum visits drop</text>
+            <text x="570" y="128" text-anchor="middle" fill="#fbbf24" font-size="8">Action: Resources</text>
+
+            <polygon points="625,100 640,93 640,107" fill="#fbbf24"/>
+
+            <rect x="645" y="60" width="100" height="80" rx="6" fill="#1e293b" stroke="#818cf8" stroke-width="1.5"/>
+            <text x="695" y="82" text-anchor="middle" fill="#818cf8" font-size="9" font-weight="bold">WEEK 38</text>
+            <text x="695" y="100" text-anchor="middle" fill="#94a3b8" font-size="7">Final exam</text>
+            <text x="695" y="112" text-anchor="middle" fill="#94a3b8" font-size="7">Exam score: 68/100</text>
+            <text x="695" y="128" text-anchor="middle" fill="#34d399" font-size="8" font-weight="bold">Result: PASS</text>
+
+            <polygon points="750,100 765,93 765,107" fill="#818cf8"/>
+
+            <rect x="770" y="55" width="115" height="90" rx="8" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="2"/>
+            <text x="827" y="78" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">Episode Reward</text>
+            <text x="827" y="100" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="bold">+15</text>
+            <text x="827" y="118" text-anchor="middle" fill="#94a3b8" font-size="8">Pass +10, Scores +3</text>
+            <text x="827" y="130" text-anchor="middle" fill="#94a3b8" font-size="8">Engagement +2</text>
+
+            <!-- Title -->
+            <text x="450" y="28" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="bold">Example: Clone type C (At-Risk Drifter) - Episode #3,472</text>
+            <text x="450" y="42" text-anchor="middle" fill="#94a3b8" font-size="9">The RL agent learned that early reminders + pre-exam resources save this student type</text>
+
+            <!-- Bottom note -->
+            <text x="450" y="180" text-anchor="middle" fill="#94a3b8" font-size="9">This episode repeats 1000s of times per clone type. The agent explores different action sequences to find the optimal policy.</text>
+        </svg>
+    </div>
+
+    <!-- Student Archetypes Grid -->
+    <div class="card" style="margin-bottom:20px;">
+        <h4 style="color:var(--accent2); margin-bottom:15px;">Student Archetypes &amp; Expected RL Impact</h4>
+        <div class="grid4">
+            <div class="card" style="background:rgba(52,211,153,.05); border-color:var(--accent3); text-align:center;">
+                <div style="font-size:2rem; margin-bottom:5px;">&#x1F31F;</div>
+                <h4 style="color:var(--accent3); font-size:.95rem;">A: Engaged Achiever</h4>
+                <p style="color:var(--muted); font-size:.8rem; margin:8px 0;">High clicks, high scores, consistent participation. Likely Distinction/Pass.</p>
+                <div style="background:var(--bg); border-radius:6px; padding:8px; margin-top:8px;">
+                    <p style="color:var(--accent3); font-size:.78rem;"><strong>RL Goal:</strong> Maintain performance. Minimal intervention needed. Avoid over-contacting.</p>
+                </div>
+            </div>
+            <div class="card" style="background:rgba(56,189,248,.05); border-color:var(--accent); text-align:center;">
+                <div style="font-size:2rem; margin-bottom:5px;">&#x1F4DA;</div>
+                <h4 style="color:var(--accent); font-size:.95rem;">B: Steady Learner</h4>
+                <p style="color:var(--muted); font-size:.8rem; margin:8px 0;">Moderate engagement, average scores, regular but not intense participation.</p>
+                <div style="background:var(--bg); border-radius:6px; padding:8px; margin-top:8px;">
+                    <p style="color:var(--accent); font-size:.78rem;"><strong>RL Goal:</strong> Push toward distinction. Targeted feedback at key assessment points.</p>
+                </div>
+            </div>
+            <div class="card" style="background:rgba(251,146,60,.05); border-color:var(--accent4); text-align:center;">
+                <div style="font-size:2rem; margin-bottom:5px;">&#x26A0;</div>
+                <h4 style="color:var(--accent4); font-size:.95rem;">C: At-Risk Drifter</h4>
+                <p style="color:var(--muted); font-size:.8rem; margin:8px 0;">Declining engagement, late submissions, sporadic VLE access. Fail/Withdraw risk.</p>
+                <div style="background:var(--bg); border-radius:6px; padding:8px; margin-top:8px;">
+                    <p style="color:var(--accent4); font-size:.78rem;"><strong>RL Goal:</strong> Re-engage before dropout. Early reminders + content adaptation critical.</p>
+                </div>
+            </div>
+            <div class="card" style="background:rgba(248,113,113,.05); border-color:var(--fail); text-align:center;">
+                <div style="font-size:2rem; margin-bottom:5px;">&#x1F6A8;</div>
+                <h4 style="color:var(--fail); font-size:.95rem;">D: Disengaged Dropout</h4>
+                <p style="color:var(--muted); font-size:.8rem; margin:8px 0;">Near-zero engagement, no submissions, likely already mentally withdrawn.</p>
+                <div style="background:var(--bg); border-radius:6px; padding:8px; margin-top:8px;">
+                    <p style="color:var(--fail); font-size:.78rem;"><strong>RL Goal:</strong> Prevent complete dropout. Tutor alert + peer connection as last resort.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What We Expect to Learn -->
+    <div class="grid2" style="margin-bottom:20px;">
+        <div class="card">
+            <h4 style="color:var(--accent3);">Expected Research Outcomes</h4>
+            <ul style="color:var(--text); font-size:.88rem; line-height:2; padding-left:20px;">
+                <li><strong>Optimal intervention timing</strong> &mdash; when to intervene for maximum impact per archetype</li>
+                <li><strong>Intervention sequences</strong> &mdash; which combinations of actions work best (e.g., reminder then feedback)</li>
+                <li><strong>Diminishing returns</strong> &mdash; when more interventions stop helping (or become counterproductive)</li>
+                <li><strong>Archetype-specific policies</strong> &mdash; different optimal strategies for each student type</li>
+                <li><strong>Cost-effectiveness</strong> &mdash; balance between intervention effort and outcome improvement</li>
+                <li><strong>Transferability</strong> &mdash; can policies learned on OULAD transfer to other LMS contexts?</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--accent4);">RL Algorithms to Compare</h4>
+            <table>
+                <thead><tr><th>Algorithm</th><th>Type</th><th>Strengths</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td><code>PPO</code></td>
+                        <td>Policy gradient</td>
+                        <td>Stable, works well with discrete &amp; continuous actions, good default choice</td>
+                    </tr>
+                    <tr>
+                        <td><code>DQN</code></td>
+                        <td>Value-based</td>
+                        <td>Simple, effective for discrete action spaces, interpretable Q-values</td>
+                    </tr>
+                    <tr>
+                        <td><code>SAC</code></td>
+                        <td>Actor-critic</td>
+                        <td>Maximum entropy, explores well, robust to hyperparameters</td>
+                    </tr>
+                    <tr>
+                        <td><code>A2C</code></td>
+                        <td>Actor-critic</td>
+                        <td>Parallelizable, fast training, good for environments with clear signals</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p style="color:var(--muted); font-size:.82rem; margin-top:10px;">
+                All algorithms will be implemented using <strong>Stable-Baselines3</strong> (Python) and compared on cumulative reward, convergence speed, and policy interpretability.
+            </p>
+        </div>
+    </div>
+
+    <!-- Timeline / Next Steps -->
+    <div class="card" style="margin-bottom:20px;">
+        <h4 style="color:var(--accent); margin-bottom:15px;">Project Roadmap</h4>
+        <div style="display:flex; flex-wrap:wrap; gap:0; justify-content:center;">
+            <div style="flex:1; min-width:140px; padding:15px; border-left:3px solid var(--accent); position:relative;">
+                <div style="position:absolute; left:-8px; top:15px; width:13px; height:13px; border-radius:50%; background:var(--accent);"></div>
+                <p style="color:var(--accent); font-weight:700; font-size:.85rem;">Phase 1-2</p>
+                <p style="color:var(--text); font-size:.82rem;">Data integration &amp; clustering</p>
+                <p style="color:var(--muted); font-size:.75rem;">OULAD + complementary datasets merged. Student archetypes identified via K-Prototypes.</p>
+            </div>
+            <div style="flex:1; min-width:140px; padding:15px; border-left:3px solid var(--accent2); position:relative;">
+                <div style="position:absolute; left:-8px; top:15px; width:13px; height:13px; border-radius:50%; background:var(--accent2);"></div>
+                <p style="color:var(--accent2); font-weight:700; font-size:.85rem;">Phase 3</p>
+                <p style="color:var(--text); font-size:.82rem;">Outcome prediction model</p>
+                <p style="color:var(--muted); font-size:.75rem;">XGBoost/RF trained to predict final_result. Feature importance drives state space design.</p>
+            </div>
+            <div style="flex:1; min-width:140px; padding:15px; border-left:3px solid var(--accent4); position:relative;">
+                <div style="position:absolute; left:-8px; top:15px; width:13px; height:13px; border-radius:50%; background:var(--accent4);"></div>
+                <p style="color:var(--accent4); font-weight:700; font-size:.85rem;">Phase 4</p>
+                <p style="color:var(--text); font-size:.82rem;">Virtual clone generation</p>
+                <p style="color:var(--muted); font-size:.75rem;">Synthetic students calibrated against real OULAD outcomes. Gym environment built.</p>
+            </div>
+            <div style="flex:1; min-width:140px; padding:15px; border-left:3px solid var(--fail); position:relative;">
+                <div style="position:absolute; left:-8px; top:15px; width:13px; height:13px; border-radius:50%; background:var(--fail);"></div>
+                <p style="color:var(--fail); font-weight:700; font-size:.85rem;">Phase 5</p>
+                <p style="color:var(--text); font-size:.82rem;">RL training &amp; evaluation</p>
+                <p style="color:var(--muted); font-size:.75rem;">PPO/DQN/SAC trained on virtual clones. Policies compared on reward, equity, and interpretability.</p>
+            </div>
+            <div style="flex:1; min-width:140px; padding:15px; border-left:3px solid var(--accent3); position:relative;">
+                <div style="position:absolute; left:-8px; top:15px; width:13px; height:13px; border-radius:50%; background:var(--accent3);"></div>
+                <p style="color:var(--accent3); font-weight:700; font-size:.85rem;">Publication</p>
+                <p style="color:var(--text); font-size:.82rem;">Paper &amp; open-source release</p>
+                <p style="color:var(--muted); font-size:.75rem;">Results published. Gym environment, trained models, and Colab notebooks released as open source.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Colab Link -->
+    <div class="card" style="text-align:center; background:linear-gradient(135deg, rgba(248,113,113,.1), rgba(251,146,60,.1));">
+        <h4 style="color:var(--accent4); font-size:1.2rem;">Full Analysis &amp; Code</h4>
+        <p style="color:var(--muted); margin:10px 0;">Data loading, harmonization, visualizations, and the complete pipeline code are available in the interactive Colab notebook.</p>
+        <a href="https://colab.research.google.com/drive/1UuKBnYqwN7I9ZwCD9R2FUgYz3AiDFQAA?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent4); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
     </div>
 </section>
 
