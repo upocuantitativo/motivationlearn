@@ -190,6 +190,7 @@
     <a href="#pipeline">RL Pipeline</a>
     <a href="#sources">Complementary Sources</a>
     <a href="#linkage">Dataset Linkage</a>
+    <a href="#integrated">Integrated Analysis</a>
 </nav>
 
 <div class="container">
@@ -1233,6 +1234,265 @@
                 <strong>Key insight:</strong> The last three rows (highlighted) represent psychological constructs that OULAD can only capture through behavioral proxies. The complementary datasets provide direct measures, enabling meta-analytic integration, transfer learning, or enrichment of OULAD-based models with explicit motivation variables for RL training.
             </p>
         </div>
+    </div>
+</section>
+
+<!-- ============ INTEGRATED ANALYSIS ============ -->
+<section id="integrated">
+    <h2>Integrated Analysis</h2>
+    <p style="margin-bottom:20px; color:var(--muted);">Summary of the cross-dataset integration combining OULAD with UCI Student Performance, xAPI-Edu-Data, PISA 2022, TIMSS 2019, and EdNet. Full analysis available in the <a href="https://colab.research.google.com/drive/1Tjc3zbDnbi9sRJGPxNuvVnZqJFFy25XP?usp=sharing" target="_blank" style="color:var(--accent);">Google Colab notebook</a>.</p>
+
+    <!-- Integrated Database Diagram (SVG) -->
+    <div class="card" style="margin-bottom:20px; overflow-x:auto;">
+        <h4 style="color:var(--accent); margin-bottom:15px;">Integrated Database Architecture</h4>
+        <svg viewBox="0 0 1000 520" style="width:100%; max-width:1000px; margin:0 auto; display:block;" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background -->
+            <rect width="1000" height="520" fill="#0f172a" rx="8"/>
+
+            <!-- Title -->
+            <text x="500" y="30" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="bold">OULAD + Complementary Educational Datasets</text>
+            <text x="500" y="48" text-anchor="middle" fill="#94a3b8" font-size="10">Solid lines = direct FK relations | Dashed lines = semantic/conceptual linkage</text>
+
+            <!-- OULAD Core (center) -->
+            <rect x="340" y="70" width="180" height="210" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="430" y="92" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="bold">studentInfo</text>
+            <text x="430" y="106" text-anchor="middle" fill="#94a3b8" font-size="8">N=32,593</text>
+            <text x="352" y="124" fill="#e2e8f0" font-size="8" font-family="monospace">id_student (PK)</text>
+            <text x="352" y="138" fill="#e2e8f0" font-size="8" font-family="monospace">gender, age_band</text>
+            <text x="352" y="152" fill="#e2e8f0" font-size="8" font-family="monospace">highest_education</text>
+            <text x="352" y="166" fill="#e2e8f0" font-size="8" font-family="monospace">imd_band, region</text>
+            <text x="352" y="180" fill="#e2e8f0" font-size="8" font-family="monospace">num_of_prev_attempts</text>
+            <text x="352" y="194" fill="#e2e8f0" font-size="8" font-family="monospace">studied_credits</text>
+            <text x="352" y="208" fill="#e2e8f0" font-size="8" font-family="monospace">disability</text>
+            <text x="352" y="224" fill="#fbbf24" font-size="8" font-family="monospace" font-weight="bold">final_result (TARGET)</text>
+
+            <!-- studentAssessment -->
+            <rect x="340" y="295" width="180" height="95" rx="8" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+            <text x="430" y="315" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">studentAssessment</text>
+            <text x="430" y="328" text-anchor="middle" fill="#94a3b8" font-size="8">N=173,912</text>
+            <text x="352" y="345" fill="#e2e8f0" font-size="8" font-family="monospace">id_assessment (FK)</text>
+            <text x="352" y="359" fill="#e2e8f0" font-size="8" font-family="monospace">date_submitted, score</text>
+            <text x="352" y="373" fill="#e2e8f0" font-size="8" font-family="monospace">is_banked</text>
+
+            <!-- studentVle -->
+            <rect x="340" y="405" width="180" height="95" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+            <text x="430" y="425" text-anchor="middle" fill="#34d399" font-size="11" font-weight="bold">studentVle</text>
+            <text x="430" y="438" text-anchor="middle" fill="#94a3b8" font-size="8">N=10,655,280</text>
+            <text x="352" y="455" fill="#e2e8f0" font-size="8" font-family="monospace">id_site (FK), date</text>
+            <text x="352" y="469" fill="#e2e8f0" font-size="8" font-family="monospace">sum_click</text>
+
+            <!-- courses -->
+            <rect x="560" y="70" width="150" height="80" rx="8" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+            <text x="635" y="92" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">courses</text>
+            <text x="635" y="106" text-anchor="middle" fill="#94a3b8" font-size="8">N=22</text>
+            <text x="572" y="124" fill="#e2e8f0" font-size="8" font-family="monospace">code_module (PK)</text>
+            <text x="572" y="138" fill="#e2e8f0" font-size="8" font-family="monospace">module_length</text>
+
+            <!-- assessments -->
+            <rect x="560" y="295" width="150" height="95" rx="8" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+            <text x="635" y="315" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">assessments</text>
+            <text x="635" y="328" text-anchor="middle" fill="#94a3b8" font-size="8">N=206</text>
+            <text x="572" y="345" fill="#e2e8f0" font-size="8" font-family="monospace">id_assessment (PK)</text>
+            <text x="572" y="359" fill="#e2e8f0" font-size="8" font-family="monospace">assessment_type</text>
+            <text x="572" y="373" fill="#e2e8f0" font-size="8" font-family="monospace">date, weight</text>
+
+            <!-- vle -->
+            <rect x="560" y="405" width="150" height="95" rx="8" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+            <text x="635" y="425" text-anchor="middle" fill="#fb923c" font-size="11" font-weight="bold">vle</text>
+            <text x="635" y="438" text-anchor="middle" fill="#94a3b8" font-size="8">N=6,364</text>
+            <text x="572" y="455" fill="#e2e8f0" font-size="8" font-family="monospace">id_site (PK)</text>
+            <text x="572" y="469" fill="#e2e8f0" font-size="8" font-family="monospace">activity_type</text>
+
+            <!-- studentRegistration -->
+            <rect x="170" y="70" width="150" height="95" rx="8" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+            <text x="245" y="92" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="bold">studentRegistration</text>
+            <text x="245" y="106" text-anchor="middle" fill="#94a3b8" font-size="8">N=32,593</text>
+            <text x="182" y="124" fill="#e2e8f0" font-size="8" font-family="monospace">date_registration</text>
+            <text x="182" y="138" fill="#e2e8f0" font-size="8" font-family="monospace">date_unregistration</text>
+
+            <!-- OULAD internal arrows (solid) -->
+            <line x1="320" y1="120" x2="340" y2="120" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+            <line x1="520" y1="110" x2="560" y2="110" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+            <line x1="520" y1="340" x2="560" y2="340" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+            <line x1="520" y1="450" x2="560" y2="450" stroke="#fb923c" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+            <line x1="430" y1="280" x2="430" y2="295" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+            <line x1="430" y1="390" x2="430" y2="405" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+            <!-- External datasets -->
+            <!-- UCI (left) -->
+            <rect x="10" y="210" width="145" height="150" rx="8" fill="#1e293b" stroke="#34d399" stroke-width="2"/>
+            <text x="82" y="232" text-anchor="middle" fill="#34d399" font-size="10" font-weight="bold">UCI Student Perf.</text>
+            <text x="82" y="246" text-anchor="middle" fill="#94a3b8" font-size="8">N=1,044</text>
+            <text x="22" y="264" fill="#e2e8f0" font-size="7.5" font-family="monospace">sex, age, address</text>
+            <text x="22" y="278" fill="#e2e8f0" font-size="7.5" font-family="monospace">Medu/Fedu, failures</text>
+            <text x="22" y="292" fill="#e2e8f0" font-size="7.5" font-family="monospace">studytime, absences</text>
+            <text x="22" y="306" fill="#e2e8f0" font-size="7.5" font-family="monospace">G1, G2, G3 (grades)</text>
+            <text x="22" y="320" fill="#e2e8f0" font-size="7.5" font-family="monospace">higher, schoolsup</text>
+
+            <!-- xAPI (left bottom) -->
+            <rect x="10" y="380" width="145" height="130" rx="8" fill="#1e293b" stroke="#fb923c" stroke-width="2"/>
+            <text x="82" y="400" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="bold">xAPI-Edu (Kalboard)</text>
+            <text x="82" y="414" text-anchor="middle" fill="#94a3b8" font-size="8">N=480</text>
+            <text x="22" y="432" fill="#e2e8f0" font-size="7.5" font-family="monospace">VisITedResources</text>
+            <text x="22" y="446" fill="#e2e8f0" font-size="7.5" font-family="monospace">Discussion, raisedhands</text>
+            <text x="22" y="460" fill="#e2e8f0" font-size="7.5" font-family="monospace">StudentAbsenceDays</text>
+            <text x="22" y="474" fill="#e2e8f0" font-size="7.5" font-family="monospace">Class (L/M/H)</text>
+
+            <!-- PISA (right) -->
+            <rect x="750" y="210" width="145" height="150" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+            <text x="822" y="232" text-anchor="middle" fill="#f87171" font-size="10" font-weight="bold">PISA 2022</text>
+            <text x="822" y="246" text-anchor="middle" fill="#94a3b8" font-size="8">N=690K</text>
+            <text x="762" y="264" fill="#e2e8f0" font-size="7.5" font-family="monospace">ESCS (socioeconomic)</text>
+            <text x="762" y="278" fill="#e2e8f0" font-size="7.5" font-family="monospace">MATHMOT (motivation)</text>
+            <text x="762" y="292" fill="#e2e8f0" font-size="7.5" font-family="monospace">MATHEFF (self-efficacy)</text>
+            <text x="762" y="306" fill="#e2e8f0" font-size="7.5" font-family="monospace">ANXMAT (anxiety)</text>
+            <text x="762" y="320" fill="#e2e8f0" font-size="7.5" font-family="monospace">TRUANCY, BELONG</text>
+
+            <!-- TIMSS (right bottom) -->
+            <rect x="750" y="380" width="145" height="130" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+            <text x="822" y="400" text-anchor="middle" fill="#f87171" font-size="10" font-weight="bold">TIMSS 2019</text>
+            <text x="822" y="414" text-anchor="middle" fill="#94a3b8" font-size="8">N=330K</text>
+            <text x="762" y="432" fill="#e2e8f0" font-size="7.5" font-family="monospace">BSBM_LM (like learning)</text>
+            <text x="762" y="446" fill="#e2e8f0" font-size="7.5" font-family="monospace">BSBM_VM (value math)</text>
+            <text x="762" y="460" fill="#e2e8f0" font-size="7.5" font-family="monospace">BSBM_CM (confidence)</text>
+            <text x="762" y="474" fill="#e2e8f0" font-size="7.5" font-family="monospace">BSMMAT01-05 (scores)</text>
+
+            <!-- EdNet (far right) -->
+            <rect x="850" y="70" width="140" height="120" rx="8" fill="#1e293b" stroke="#a78bfa" stroke-width="2"/>
+            <text x="920" y="92" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="bold">EdNet (Riiid)</text>
+            <text x="920" y="106" text-anchor="middle" fill="#94a3b8" font-size="8">N=131M interactions</text>
+            <text x="862" y="124" fill="#e2e8f0" font-size="7.5" font-family="monospace">timestamp</text>
+            <text x="862" y="138" fill="#e2e8f0" font-size="7.5" font-family="monospace">question_id, elapsed_time</text>
+            <text x="862" y="152" fill="#e2e8f0" font-size="7.5" font-family="monospace">action_type, source</text>
+            <text x="862" y="166" fill="#e2e8f0" font-size="7.5" font-family="monospace">platform</text>
+
+            <!-- Dashed linkage arrows (external -> OULAD) -->
+            <line x1="155" y1="280" x2="340" y2="180" stroke="#34d399" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowGreen)"/>
+            <line x1="155" y1="440" x2="340" y2="440" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowOrange)"/>
+            <line x1="750" y1="280" x2="520" y2="180" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowRed)"/>
+            <line x1="750" y1="440" x2="520" y2="460" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowRed)"/>
+            <line x1="850" y1="150" x2="520" y2="340" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#arrowPurple)"/>
+
+            <!-- Linkage labels on arrows -->
+            <text x="220" y="215" fill="#94a3b8" font-size="7" font-style="italic">sex&#x2194;gender</text>
+            <text x="220" y="226" fill="#94a3b8" font-size="7" font-style="italic">failures&#x2194;prev_attempts</text>
+            <text x="220" y="237" fill="#94a3b8" font-size="7" font-style="italic">G1-G3&#x2194;score</text>
+
+            <text x="195" y="425" fill="#94a3b8" font-size="7" font-style="italic">VisITedResources&#x2194;sum_click</text>
+            <text x="195" y="436" fill="#94a3b8" font-size="7" font-style="italic">Class&#x2194;final_result</text>
+
+            <text x="620" y="215" fill="#94a3b8" font-size="7" font-style="italic">ESCS&#x2194;imd_band</text>
+            <text x="620" y="226" fill="#94a3b8" font-size="7" font-style="italic">MATHMOT&#x2194;engagement</text>
+            <text x="620" y="237" fill="#94a3b8" font-size="7" font-style="italic">ANXMAT&#x2194;exam score</text>
+
+            <text x="620" y="395" fill="#94a3b8" font-size="7" font-style="italic">Like/Value/Confident</text>
+            <text x="620" y="406" fill="#94a3b8" font-size="7" font-style="italic">&#x2194;VLE engagement</text>
+
+            <text x="700" y="220" fill="#94a3b8" font-size="7" font-style="italic">elapsed_time&#x2194;sum_click</text>
+            <text x="700" y="231" fill="#94a3b8" font-size="7" font-style="italic">timestamp&#x2194;date</text>
+
+            <!-- Arrow markers -->
+            <defs>
+                <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#38bdf8"/></marker>
+                <marker id="arrowOrange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#fb923c"/></marker>
+                <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#a78bfa"/></marker>
+                <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#34d399"/></marker>
+                <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#f87171"/></marker>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- Key Findings -->
+    <div class="grid2">
+        <div class="card">
+            <h4 style="color:var(--accent3);">High Precision Linkages</h4>
+            <table>
+                <thead><tr><th>Construct</th><th>OULAD</th><th>External Match</th><th>Quality</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Gender</strong></td><td><code>gender</code></td><td>UCI <code>sex</code>, xAPI <code>gender</code>, PISA <code>ST004D01T</code></td><td style="color:var(--pass);">DIRECT</td></tr>
+                    <tr><td><strong>Prior Failures</strong></td><td><code>num_of_prev_attempts</code></td><td>UCI <code>failures</code></td><td style="color:var(--pass);">DIRECT</td></tr>
+                    <tr><td><strong>Engagement</strong></td><td><code>sum_click</code></td><td>xAPI <code>VisITedResources</code></td><td style="color:var(--pass);">DIRECT</td></tr>
+                    <tr><td><strong>Timestamps</strong></td><td><code>date</code></td><td>EdNet <code>timestamp</code></td><td style="color:var(--pass);">DIRECT</td></tr>
+                    <tr><td><strong>SES</strong></td><td><code>imd_band</code></td><td>PISA <code>ESCS</code></td><td style="color:var(--pass);">DIRECT</td></tr>
+                    <tr><td><strong>Motivation Scales</strong></td><td><em>proxy only</em></td><td>PISA <code>MATHMOT</code>, TIMSS <code>BSBM_LM</code></td><td style="color:var(--pass);">DIRECT (external)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card">
+            <h4 style="color:var(--accent4);">Semantic / Proxy Linkages</h4>
+            <table>
+                <thead><tr><th>Construct</th><th>OULAD</th><th>External Match</th><th>Quality</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Education</strong></td><td><code>highest_education</code> (student)</td><td>UCI <code>Medu</code> (parent)</td><td style="color:var(--withdrawn);">SEMANTIC</td></tr>
+                    <tr><td><strong>Score</strong></td><td><code>final_result</code> (4 cat.)</td><td>UCI <code>G3</code> (0-20), xAPI <code>Class</code> (L/M/H)</td><td style="color:var(--withdrawn);">SEMANTIC</td></tr>
+                    <tr><td><strong>Dropout</strong></td><td><code>date_unregistration</code></td><td>UCI <code>absences</code>, xAPI <code>AbsenceDays</code></td><td style="color:var(--withdrawn);">SEMANTIC</td></tr>
+                    <tr><td><strong>Anxiety</strong></td><td><em>no direct measure</em></td><td>PISA <code>ANXMAT</code></td><td style="color:var(--fail);">CONCEPTUAL</td></tr>
+                    <tr><td><strong>Self-Efficacy</strong></td><td><em>no direct measure</em></td><td>PISA <code>MATHEFF</code>, TIMSS <code>BSBM_CM</code></td><td style="color:var(--fail);">CONCEPTUAL</td></tr>
+                    <tr><td><strong>Belonging</strong></td><td><em>forum activity proxy</em></td><td>PISA <code>BELONG</code></td><td style="color:var(--fail);">CONCEPTUAL</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Cross-Dataset Patterns -->
+    <div class="card" style="margin-top:20px;">
+        <h4 style="color:var(--accent2);">Cross-Dataset Findings</h4>
+        <div class="grid2" style="margin-top:10px;">
+            <div>
+                <h4 style="font-size:.9rem; color:var(--accent);">Consistent Patterns Across Datasets</h4>
+                <ul style="color:var(--text); font-size:.88rem; line-height:1.8; padding-left:20px;">
+                    <li><strong>Prior failures strongly predict outcomes</strong> in both OULAD (<code>num_of_prev_attempts</code>) and UCI (<code>failures</code>) &mdash; most reliable cross-dataset linkage</li>
+                    <li><strong>Engagement metrics are strongly predictive</strong> &mdash; OULAD <code>sum_click</code> and xAPI <code>VisITedResources</code> both show monotonic relationships with performance</li>
+                    <li><strong>Socioeconomic deprivation</strong> (OULAD <code>imd_band</code> &harr; PISA <code>ESCS</code>) is a key contextual factor affecting both motivation and outcomes</li>
+                    <li><strong>Gender effects are consistent</strong> across OULAD, UCI, and xAPI &mdash; but effect sizes differ by educational context</li>
+                    <li><strong>Education background positively correlates</strong> with performance in all datasets that include this variable</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-size:.9rem; color:var(--accent4);">Limitations & Caveats</h4>
+                <ul style="color:var(--text); font-size:.88rem; line-height:1.8; padding-left:20px;">
+                    <li><strong>No record-level joins</strong>: datasets cover different student populations &mdash; linkages are at the construct level</li>
+                    <li><strong>Scale differences</strong>: OULAD uses UK-specific measures (IMD bands, UK regions); others use international scales</li>
+                    <li><strong>Temporal context differs</strong>: OULAD (2013-14), UCI (2014), xAPI (2017), PISA (2022), TIMSS (2019)</li>
+                    <li><strong>Age ranges differ</strong>: OULAD (adults), UCI (15-22), PISA/TIMSS (15y/8th grade)</li>
+                    <li><strong>OULAD lacks direct psychological measures</strong> &mdash; PISA/TIMSS provide motivation, self-efficacy, anxiety scales that can enrich models via transfer learning</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommendations -->
+    <div class="card" style="margin-top:20px;">
+        <h4 style="color:var(--accent3);">Recommended Integration Strategies</h4>
+        <div class="grid4" style="margin-top:12px;">
+            <div class="card stat-card" style="background:rgba(52,211,153,.08); border-color:var(--accent3);">
+                <div class="number" style="font-size:1.5rem;">1</div>
+                <div class="label" style="color:var(--text); font-weight:600;">Feature Engineering</div>
+                <p style="font-size:.8rem; color:var(--muted); margin-top:6px;">Use VLE temporal patterns to create motivation proxy features (regularity, intensity, diversity)</p>
+            </div>
+            <div class="card stat-card" style="background:rgba(167,139,250,.08); border-color:var(--accent2);">
+                <div class="number" style="font-size:1.5rem;">2</div>
+                <div class="label" style="color:var(--text); font-weight:600;">Transfer Learning</div>
+                <p style="font-size:.8rem; color:var(--muted); margin-top:6px;">Pre-train motivation models on PISA/TIMSS psychometric data, fine-tune on OULAD behavioral features</p>
+            </div>
+            <div class="card stat-card" style="background:rgba(56,189,248,.08); border-color:var(--accent);">
+                <div class="number" style="font-size:1.5rem;">3</div>
+                <div class="label" style="color:var(--text); font-weight:600;">Meta-Analysis</div>
+                <p style="font-size:.8rem; color:var(--muted); margin-top:6px;">Compare effect sizes of education, engagement, and SES across datasets for robust conclusions</p>
+            </div>
+            <div class="card stat-card" style="background:rgba(251,146,60,.08); border-color:var(--accent4);">
+                <div class="number" style="font-size:1.5rem;">4</div>
+                <div class="label" style="color:var(--text); font-weight:600;">RL Environment</div>
+                <p style="font-size:.8rem; color:var(--muted); margin-top:6px;">Use clustered student profiles from OULAD + complementary insights as virtual agents for RL training</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Colab Link -->
+    <div class="card" style="margin-top:20px; text-align:center; background:linear-gradient(135deg, rgba(56,189,248,.1), rgba(167,139,250,.1));">
+        <h4 style="color:var(--accent); font-size:1.2rem;">Full Analysis Notebook</h4>
+        <p style="color:var(--muted); margin:10px 0;">All code, data loading, harmonization, cross-dataset comparisons, diagrams, and export functions are available in the interactive Colab notebook.</p>
+        <a href="https://colab.research.google.com/drive/1Tjc3zbDnbi9sRJGPxNuvVnZqJFFy25XP?usp=sharing" target="_blank" style="display:inline-block; padding:12px 30px; background:var(--accent); color:var(--bg); border-radius:8px; text-decoration:none; font-weight:700; font-size:1rem; margin-top:8px;">Open in Google Colab</a>
     </div>
 </section>
 
